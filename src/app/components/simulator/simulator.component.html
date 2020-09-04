@@ -18,7 +18,12 @@
         *ngFor="let item of simulator.data; let i = index"
         class="wrapper-data"
       >
-        <div class="ndata mat-elevation-z4" color="primary" id="d{{ i }}">
+        <div
+          class="ndata mat-elevation-z4"
+          [ngClass]="{ selected: selectA == i || selectB == i }"
+          color="primary"
+          id="d{{ i }}"
+        >
           {{ item }}
         </div>
       </div>
@@ -36,6 +41,7 @@
     </div>
     <mat-slider
       [min]="0"
+      [step]="0.1"
       [max]="10"
       [(ngModel)]="speed"
       [thumbLabel]="true"

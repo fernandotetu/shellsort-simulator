@@ -11,6 +11,10 @@ import * as conn from "jquery-connections";
 export class SimulatorComponent implements OnInit {
   simulator: Simulator;
   speed = 1;
+
+  selectA: number;
+  selectB: number;
+
   constructor() {
     this.simulator = new Simulator();
     this.simulator.data.push(10);
@@ -21,6 +25,7 @@ export class SimulatorComponent implements OnInit {
     this.simulator.data.push(2);
     this.simulator.data.push(1);
     this.simulator.data.push(12);
+    this.simulator.updateHlist();
   }
 
   start() {
@@ -34,25 +39,27 @@ export class SimulatorComponent implements OnInit {
     const array = this.simulator.data;
     const gaps = this.simulator.hList;
     for (var g = 0; g < gaps.length; g++) {
-      var gap = gaps[g];
+      const gap = gaps[g];
 
       for (var i = gap; i < array.length; i++) {
-        var temp = array[i];
-        let prev = i - gap;
-        var aux = array[prev];
-        $(`#d${prev}`).toggleClass("selected");
-        $(`#d${i}`).toggleClass("selected");
+        const temp = array[i];
+        const prev = i - gap;
+        const aux = array[prev];
+        this.selectA = prev;
+        this.selectB = i;
+        // $(`#d${prev}`).addClass("selected");
+        //$(`#d${i}`).addClass("selected");
         console.log(aux, "-", temp);
+        await this.delay(this.speed * 1000);
+
         for (var j = i; j >= gap && array[j - gap] > temp; j -= gap) {
           array[j] = array[j - gap];
         }
         array[j] = temp;
-        await this.delay(this.speed * 1000);
-
-        $(`#d${prev}`).toggleClass("selected");
-        $(`#d${i}`).toggleClass("selected");
       }
     }
+    this.selectA = undefined;
+    this.selectB = undefined;
     return array;
   }
   delay(ms: number) {
