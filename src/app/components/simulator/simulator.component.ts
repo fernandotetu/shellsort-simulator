@@ -85,8 +85,13 @@ export class SimulatorComponent implements OnInit {
         const temp = array[i];
         const prev = i - gap;
         const aux = array[prev];
+
         this.selectA = prev;
-        this.selectB = i;
+        if (gap > 1) {
+          this.selectB = i;
+        } else {
+          this.selectB = null;
+        }
         // $(`#d${prev}`).addClass("selected");
         //$(`#d${i}`).addClass("selected");
         console.log(aux, "-", temp);
