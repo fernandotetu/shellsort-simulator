@@ -10,9 +10,9 @@
     <app-simulator-settings [simulator]="simulator"></app-simulator-settings>
   </mat-expansion-panel>
 </mat-accordion>
-<div fxLayout fxLayout.xs="column">
+<div fxLayout fxLayout.xs="column" class="container">
   <div fxFlex="80%" fxFlex.xs="100%" class="col-esq">
-    <h3>Conjunto com {{ simulator.data.length }} itens!</h3>
+    <h3 mat-dialog-title>Conjunto com {{ simulator.data.length }} itens!</h3>
     <div class="datacnt" id="cnt">
       <div
         *ngFor="let item of simulator.data; let i = index"
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="simulator.data.length > 0">
+    <div *ngIf="showGraph">
       <div>
         <div style="display: block">
           <canvas
@@ -49,7 +49,7 @@
     <h3>H lista gerada</h3>
     <div>
       <span
-        class="hdata mat-elevation-z4"
+        class="hdata"
         color="primary"
         id="d{{ item }}"
         *ngFor="let item of simulator.hList"
@@ -57,9 +57,25 @@
         {{ item }}
       </span>
     </div>
+    <mat-divider></mat-divider>
     <div>
-      <button mat-flat-button color="accent" (click)="start()">
-        <span class="material-icons"> play_circle_outline </span>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="start()"
+        class="btnPanel"
+        [disabled]="this.simulator.data.length == 0"
+      >
+        Ordenar<span class="material-icons"> play_circle_outline </span>
+      </button>
+
+      <button
+        mat-flat-button
+        color="accent"
+        [disabled]="this.simulator.data.length == 0"
+        (click)="restart()"
+      >
+        Reiniciar<span class="material-icons"> replay </span>
       </button>
     </div>
     <mat-slider
@@ -69,5 +85,6 @@
       [(ngModel)]="speed"
       [thumbLabel]="true"
     ></mat-slider>
+    <mat-slide-toggle [(ngModel)]="showGraph">Exibir gráfico</mat-slide-toggle>
   </div>
 </div>

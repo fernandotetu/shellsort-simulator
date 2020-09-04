@@ -1,3 +1,6 @@
+.container {
+  padding: 0.5rem;
+}
 .example-headers-align .mat-expansion-panel-header-description {
   justify-content: space-between;
   align-items: center;
@@ -18,15 +21,20 @@
   border-radius: 10%;
   margin: 0.3rem 0.3rem 0;
 }
-hData {
+.btnPanel {
+  margin: 0.3rem;
+}
+.hdata {
   display: inline-block;
+  min-width: 1.5rem;
 
   color: #6a1b9a;
+  border: solid 1px #6a1b9a;
   //background: #6a1b9a;
   padding: 0.3rem;
   text-align: center;
   border-radius: 10%;
-  margin: 0.3rem 0.3rem 0;
+  margin: 0.1rem 0.1rem 0;
 }
 .selected {
   background: red;

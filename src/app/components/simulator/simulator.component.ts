@@ -10,6 +10,7 @@ import { Label, BaseChartDirective } from "ng2-charts";
 })
 export class SimulatorComponent implements OnInit {
   simulator: Simulator;
+  showGraph = false;
   @ViewChild(BaseChartDirective)
   chart: BaseChartDirective;
 
@@ -39,18 +40,20 @@ export class SimulatorComponent implements OnInit {
 
   constructor() {
     this.simulator = new Simulator();
-    this.simulator.add(10);
-    this.simulator.add(4);
-    this.simulator.add(5);
-    this.simulator.add(3);
-    this.simulator.add(9);
-    this.simulator.add(2);
-    this.simulator.add(1);
-    this.simulator.add(12);
     this.barChartData[0].data = this.simulator.data;
-    this.barChartLabels;
   }
-
+  restart() {
+    for (let i = this.simulator.data.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.simulator.data[i], this.simulator.data[j]] = [
+        this.simulator.data[j],
+        this.simulator.data[i],
+      ];
+    }
+    if (this.showGraph) {
+      this.chart.update();
+    }
+  }
   start() {
     //$("#d2").parent().append("<i class='material-icons'>home</i> ");
     //$("#d2").toggleClass("mat-elevation-z4");
@@ -94,8 +97,9 @@ export class SimulatorComponent implements OnInit {
         }
         array[j] = temp;
         //this.barChartData[0].data;
-        this.chart.update();
-        console.log(this.barChartData[0].data);
+        if (this.showGraph) {
+          this.chart.update();
+        }
       }
     }
     this.selectA = undefined;
