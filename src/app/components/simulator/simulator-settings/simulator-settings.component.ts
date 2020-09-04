@@ -17,9 +17,8 @@ export class SimulatorSettingsComponent implements OnInit {
 
   add() {
     if (this.entryData) {
-      this.simulator.data.push(parseInt(this.entryData));
+      this.simulator.add(parseInt(this.entryData));
       this.entryData = null;
-      this.simulator.updateHlist(this.strategy);
     }
   }
 
@@ -30,9 +29,8 @@ export class SimulatorSettingsComponent implements OnInit {
   generateNumbers() {
     for (let i = 0; i < 5; i++) {
       const generated = Math.floor(Math.random() * 100) + 1;
-      this.simulator.data.push(generated);
+      this.simulator.add(generated);
     }
-    this.simulator.updateHlist(this.strategy);
   }
 
   ngOnInit(): void {}

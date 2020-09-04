@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Simulator } from "src/app/shared/simulator";
 
-import * as $ from "jquery";
-import * as conn from "jquery-connections";
+import { ChartDataSets, ChartType, ChartOptions } from "chart.js";
+import { Label, BaseChartDirective } from "ng2-charts";
 @Component({
   selector: "app-simulator",
   templateUrl: "./simulator.component.html",
@@ -10,6 +10,28 @@ import * as conn from "jquery-connections";
 })
 export class SimulatorComponent implements OnInit {
   simulator: Simulator;
+  @ViewChild(BaseChartDirective)
+  chart: BaseChartDirective;
+
+  colors = [{ backgroundColor: "#6a1b9a" }];
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: "end",
+        align: "end",
+      },
+    },
+  };
+  public barChartLabels: Label[]; //this.simulator.labels;
+  public barChartType: ChartType = "bar";
+  public barChartLegend = false;
+  // public barChartPlugins = [pluginDataLabels];
+
+  public barChartData: ChartDataSets[] = [{ data: [], label: "Series A" }];
+
   speed = 1;
 
   selectA: number;
@@ -17,15 +39,16 @@ export class SimulatorComponent implements OnInit {
 
   constructor() {
     this.simulator = new Simulator();
-    this.simulator.data.push(10);
-    this.simulator.data.push(4);
-    this.simulator.data.push(5);
-    this.simulator.data.push(3);
-    this.simulator.data.push(9);
-    this.simulator.data.push(2);
-    this.simulator.data.push(1);
-    this.simulator.data.push(12);
-    this.simulator.updateHlist();
+    this.simulator.add(10);
+    this.simulator.add(4);
+    this.simulator.add(5);
+    this.simulator.add(3);
+    this.simulator.add(9);
+    this.simulator.add(2);
+    this.simulator.add(1);
+    this.simulator.add(12);
+    this.barChartData[0].data = this.simulator.data;
+    this.barChartLabels;
   }
 
   start() {
@@ -33,8 +56,22 @@ export class SimulatorComponent implements OnInit {
     //$("#d2").toggleClass("mat-elevation-z4");
     //$("#d10").toggleClass("selected");
     this.shellSort();
+    //this.barChartLabels.length = 0;
+    //this.barChartLabels.push(this.simulator.labels);
   }
-
+  public randomize(): void {
+    // Only Change 3 values
+    const data = [
+      Math.round(Math.random() * 100),
+      59,
+      80,
+      Math.random() * 100,
+      56,
+      Math.random() * 100,
+      40,
+    ];
+    this.barChartData[0].data = data;
+  }
   async shellSort() {
     const array = this.simulator.data;
     const gaps = this.simulator.hList;
@@ -56,6 +93,9 @@ export class SimulatorComponent implements OnInit {
           array[j] = array[j - gap];
         }
         array[j] = temp;
+        //this.barChartData[0].data;
+        this.chart.update();
+        console.log(this.barChartData[0].data);
       }
     }
     this.selectA = undefined;

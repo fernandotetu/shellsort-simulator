@@ -5,10 +5,18 @@ export enum H_Strategy {
 
 export class Simulator {
   data: Array<number>;
+  labels: Array<string>;
   hList: Array<number>;
   constructor() {
     this.data = new Array<number>();
     this.hList = new Array<number>();
+    this.labels = new Array<string>();
+  }
+
+  add(value: number) {
+    this.data.push(value);
+    this.labels.push(`${value}`);
+    this.updateHlist();
   }
 
   updateHlist(type: string = H_Strategy.ODD) {

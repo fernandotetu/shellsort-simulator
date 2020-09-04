@@ -10,8 +10,8 @@
     <app-simulator-settings [simulator]="simulator"></app-simulator-settings>
   </mat-expansion-panel>
 </mat-accordion>
-<div fxLayout>
-  <div fxFlex="80%" class="col-esq">
+<div fxLayout fxLayout.xs="column">
+  <div fxFlex="80%" fxFlex.xs="100%" class="col-esq">
     <h3>Conjunto com {{ simulator.data.length }} itens!</h3>
     <div class="datacnt" id="cnt">
       <div
@@ -28,8 +28,24 @@
         </div>
       </div>
     </div>
+    <div *ngIf="simulator.data.length > 0">
+      <div>
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="barChartData"
+            [colors]="colors"
+            [labels]="simulator.labels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
   </div>
-  <div fxFlex="20%" class="col-dir">
+  <div fxFlex="20%" fxFlex.xs="100%" class="col-dir">
     <h3>H lista gerada</h3>
     <div *ngFor="let item of simulator.hList" class="wrapper-data">
       <div class="ndata mat-elevation-z4" color="primary" id="d{{ item }}">
@@ -48,5 +64,3 @@
     ></mat-slider>
   </div>
 </div>
-
-<!-- <button (click)="start()">prey</button> -->

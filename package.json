@@ -22,8 +22,10 @@
     "@angular/platform-browser": "~9.1.11",
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
+    "chart.js": "^2.9.3",
     "jquery": "^3.5.1",
     "jquery-connections": "^1.0.1",
+    "ng2-charts": "^2.4.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -34,6 +36,7 @@
     "@angular/compiler-cli": "~9.1.11",
     "@types/jquery": "^3.5.1",
     "@types/node": "^12.11.1",
+    "ng2-charts-schematics": "^0.1.7",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
