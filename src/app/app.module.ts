@@ -9,9 +9,10 @@ import { MaterialModule } from "./shared/material.module";
 import { SimulatorComponent } from "./components/simulator/simulator.component";
 import { SimulatorModule } from "./components/simulator/simulator.module";
 import { SimulatorSettingsComponent } from "./components/simulator/simulator-settings/simulator-settings.component";
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, ContactComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

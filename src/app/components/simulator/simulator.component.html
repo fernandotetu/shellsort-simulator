@@ -47,13 +47,20 @@
   </div>
   <div fxFlex="20%" fxFlex.xs="100%" class="col-dir">
     <h3>H lista gerada</h3>
-    <div *ngFor="let item of simulator.hList" class="wrapper-data">
-      <div class="ndata mat-elevation-z4" color="primary" id="d{{ item }}">
+    <div>
+      <span
+        class="hdata mat-elevation-z4"
+        color="primary"
+        id="d{{ item }}"
+        *ngFor="let item of simulator.hList"
+      >
         {{ item }}
-      </div>
+      </span>
     </div>
     <div>
-      <button mat-raised-button color="accent" (click)="start()">Start</button>
+      <button mat-flat-button color="accent" (click)="start()">
+        <span class="material-icons"> play_circle_outline </span>
+      </button>
     </div>
     <mat-slider
       [min]="0"
