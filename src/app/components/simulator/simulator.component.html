@@ -10,11 +10,37 @@
     <app-simulator-settings [simulator]="simulator"></app-simulator-settings>
   </mat-expansion-panel>
 </mat-accordion>
-<div class="datacnt" id="d1">
-  <div *ngFor="let item of simulator.data" class="wrapper-data">
-    <div class="ndata mat-elevation-z4" color="primary" id="d{{ item }}">
-      {{ item }}
+<div fxLayout>
+  <div fxFlex="80%" class="col-esq">
+    <h3>Conjunto com {{ simulator.data.length }} itens!</h3>
+    <div class="datacnt" id="cnt">
+      <div
+        *ngFor="let item of simulator.data; let i = index"
+        class="wrapper-data"
+      >
+        <div class="ndata mat-elevation-z4" color="primary" id="d{{ i }}">
+          {{ item }}
+        </div>
+      </div>
     </div>
   </div>
+  <div fxFlex="20%" class="col-dir">
+    <h3>H lista gerada</h3>
+    <div *ngFor="let item of simulator.hList" class="wrapper-data">
+      <div class="ndata mat-elevation-z4" color="primary" id="d{{ item }}">
+        {{ item }}
+      </div>
+    </div>
+    <div>
+      <button mat-raised-button color="accent" (click)="start()">Start</button>
+    </div>
+    <mat-slider
+      [min]="0"
+      [max]="10"
+      [(ngModel)]="speed"
+      [thumbLabel]="true"
+    ></mat-slider>
+  </div>
 </div>
+
 <!-- <button (click)="start()">prey</button> -->

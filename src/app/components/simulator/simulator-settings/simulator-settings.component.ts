@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { SimulatorModule } from "../simulator.module";
-import { Simulator } from "src/app/shared/simulator";
+import { Simulator, H_Strategy } from "src/app/shared/simulator";
 
 @Component({
   selector: "app-simulator-settings",
@@ -11,13 +11,20 @@ export class SimulatorSettingsComponent implements OnInit {
   @Input()
   simulator: Simulator;
   entryData: string;
+
+  strategy: string = H_Strategy.ODD;
   constructor() {}
 
   add() {
     if (this.entryData) {
-      this.simulator.data.push(new Number(this.entryData));
+      this.simulator.data.push(parseInt(this.entryData));
       this.entryData = null;
+      this.simulator.updateHlist(this.strategy);
     }
+  }
+
+  changeStrategy() {
+    this.simulator.updateHlist(this.strategy);
   }
 
   generateNumbers() {
@@ -25,6 +32,7 @@ export class SimulatorSettingsComponent implements OnInit {
       const generated = Math.floor(Math.random() * 100) + 1;
       this.simulator.data.push(generated);
     }
+    this.simulator.updateHlist(this.strategy);
   }
 
   ngOnInit(): void {}

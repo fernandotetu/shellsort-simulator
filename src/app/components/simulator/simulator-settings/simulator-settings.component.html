@@ -19,3 +19,9 @@
     <span class="material-icons"> replay_5 </span>
   </button>
 </div>
+<mat-divider></mat-divider>
+<p>Defina a estratégia para gerar o fator "H"</p>
+<mat-radio-group [(ngModel)]="strategy" (change)="changeStrategy()">
+  <mat-radio-button value="even">Múltiplos de 2</mat-radio-button>
+  <mat-radio-button value="odd">Números ímpares</mat-radio-button>
+</mat-radio-group>
